@@ -2,15 +2,19 @@ package Stepic.org;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Calculator {
     public static void main(String[] args) throws FileNotFoundException {
-        String path = "input.txt";
-        File file = new File(path);
-        Scanner sc = new Scanner (file);
-        while(sc.hasNextLine()) {
-            String Expression = sc.nextLine();
+        String path1 = "input.txt";
+        File file1 = new File(path1);
+        Scanner sc1 = new Scanner (file1);
+        String path2 = "output.txt";
+        File file2 = new File(path2);
+        PrintWriter pw = new PrintWriter(file2);
+        while(sc1.hasNextLine()) {
+            String Expression = sc1.nextLine();
             String[] symbols = Expression.split(" ");
 
             String op = symbols[1];
@@ -23,26 +27,31 @@ public class Calculator {
                     try {
                         throw new Exception();
                     } catch (Exception e) {
-                        System.out.println("Error! Division by zero");
+                        pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + "Error! Division by zero");
                     }
                 } else if (op.equals("/") || op.equals("*") || op.equals("+") || op.equals("-")) {
                     switch (op) {
-                        case "/" -> System.out.println(a / b);
-                        case "*" -> System.out.println(a * b);
-                        case "+" -> System.out.println(a + b);
-                        case "-" -> System.out.println(a - b);
+                        case "/" -> pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + a / b);
+                        case "*" -> pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + a * b);
+                        case "+" -> pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + a + b);
+                        case "-" -> pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + Double.toString(a - b));
                     }
                 } else {
                     try {
                         throw new Exception();
                     } catch (Exception e) {
-                        System.out.println("Operation Error!");
+                        pw.println(symbols[0] + " " + op + " " + symbols[2] +  " " + "=" + " " + "Operation Error!");
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Error! Not number");
+                String c = symbols[0];
+                String d = symbols[2];
+                pw.println(c + " " + op + " " + d +  " " + "=" + " " + "Error! Not number");
             }
+
         }
+        sc1.close();
+        pw.close();
         }
     }
 

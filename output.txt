@@ -1,0 +1,5 @@
+5 / 2 = 2.5
+14 - f = Error! Not number
+18 * 0 = 0.0
+12 / 0 = Error! Division by zero
+15 -- 12 = Operation Error!

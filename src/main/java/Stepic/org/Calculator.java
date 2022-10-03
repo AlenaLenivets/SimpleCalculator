@@ -1,14 +1,19 @@
 package Stepic.org;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Calculator {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner (System.in);
-        String Expression = sc.nextLine();
-        String [] symbols = Expression.split(" ");
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = "input.txt";
+        File file = new File(path);
+        Scanner sc = new Scanner (file);
+        while(sc.hasNextLine()) {
+            String Expression = sc.nextLine();
+            String[] symbols = Expression.split(" ");
 
-        String op = symbols[1];
+            String op = symbols[1];
 
             try {
                 double a = Double.parseDouble(symbols[0]);
@@ -37,6 +42,7 @@ public class Calculator {
             } catch (Exception e) {
                 System.out.println("Error! Not number");
             }
+        }
         }
     }
 
